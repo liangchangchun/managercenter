@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/data/mongo  
+        http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
+        
+    <mongo:mongo host="${mongo_url}" port="27017" />
+	
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="cms" />
+	</bean>
+ 	
+ 	<!-- mongo方法实现类 -->
+	 <bean id="commentDaoImp" class="lcc.manager.mongodb.dao.impl.CommentDaoImp">
+		<property name="mongoTemplate" ref="mongoTemplate"></property>
+	</bean>    
+        
+</beans>

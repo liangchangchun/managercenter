@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="lcc.manager.dao.UserMapper" >
+  <!-- 内容resultMap -->
+  <resultMap id="BaseResultMap" type="lcc.manager.model.user.UserModel" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_code" property="userCode" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <!-- 增加 -->
+  <insert id="addUser" parameterType="lcc.manager.model.user.UserModel" useGeneratedKeys="true" keyProperty="userId">
+   insert into lcc_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userCode != null" >
+        user_code,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userCode != null" >
+        #{userCode,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 修改 -->
+  
+  
+</mapper>
